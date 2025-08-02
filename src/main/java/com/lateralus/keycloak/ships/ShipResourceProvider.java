@@ -2,6 +2,8 @@ package com.lateralus.keycloak.ships;
 
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.services.resource.RealmResourceProvider;
+import org.keycloak.services.managers.AppAuthManager;
+import org.keycloak.models.RealmModel;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -12,9 +14,15 @@ import java.util.HashMap;
 public class ShipResourceProvider implements RealmResourceProvider {
     
     private final KeycloakSession session;
+    private final AppAuthManager.AuthResult auth;
     
     public ShipResourceProvider(KeycloakSession session) {
         this.session = session;
+        AppAuthManager authManager = new AppAuthManager();
+        this.auth = new AppAuthManager.BearerTokenAuthenticator(session).authenticate();
+        if (auth == null) {
+            throw new WebApplicationException("Admin access required", Response.Status.FORBIDDEN);
+        }
     }
     
     @Override
