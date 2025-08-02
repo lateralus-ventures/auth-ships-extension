@@ -5,52 +5,52 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="1.0.0-ships" author="lateralus">
-        <createTable tableName="SHIP">
-            <column name="ID" type="VARCHAR(36)">
+        <createTable tableName="ship">
+            <column name="id" type="VARCHAR(36)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="NAME" type="VARCHAR(255)">
+            <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESCRIPTION" type="VARCHAR(500)"/>
-            <column name="IMO" type="VARCHAR(20)"/>
-            <column name="TYPE" type="VARCHAR(50)"/>
-            <column name="ORGANIZATION_ID" type="VARCHAR(36)"/>
-            <column name="REALM_ID" type="VARCHAR(36)">
+            <column name="description" type="VARCHAR(500)"/>
+            <column name="imo" type="VARCHAR(20)"/>
+            <column name="type" type="VARCHAR(50)"/>
+            <column name="organization_id" type="VARCHAR(36)"/>
+            <column name="realm_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="SHIP_EQUIPMENT" type="TEXT"/>
-            <column name="CREW_AI_MODE" type="VARCHAR(20)"/>
-            <column name="CREATED_AT" type="BIGINT"/>
-            <column name="UPDATED_AT" type="BIGINT"/>
+            <column name="ship_equipment" type="TEXT"/>
+            <column name="crew_ai_mode" type="VARCHAR(20)"/>
+            <column name="created_at" type="BIGINT"/>
+            <column name="updated_at" type="BIGINT"/>
         </createTable>
         
-        <createTable tableName="USER_SHIP">
-            <column name="USER_ID" type="VARCHAR(36)">
+        <createTable tableName="user_ship">
+            <column name="user_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="SHIP_ID" type="VARCHAR(36)">
+            <column name="ship_id" type="VARCHAR(36)">
                 <constraints nullable="false"/>
             </column>
-            <column name="ASSIGNED_AT" type="BIGINT"/>
+            <column name="assigned_at" type="BIGINT"/>
         </createTable>
         
-        <addPrimaryKey tableName="USER_SHIP" columnNames="USER_ID,SHIP_ID"/>
+        <addPrimaryKey tableName="user_ship" columnNames="user_id,ship_id"/>
         
-        <createIndex tableName="SHIP" indexName="IDX_SHIP_REALM">
-            <column name="REALM_ID"/>
+        <createIndex tableName="ship" indexName="idx_ship_realm">
+            <column name="realm_id"/>
         </createIndex>
         
-        <createIndex tableName="SHIP" indexName="IDX_SHIP_ORG">
-            <column name="ORGANIZATION_ID"/>
+        <createIndex tableName="ship" indexName="idx_ship_org">
+            <column name="organization_id"/>
         </createIndex>
         
-        <createIndex tableName="USER_SHIP" indexName="IDX_USER_SHIP_USER">
-            <column name="USER_ID"/>
+        <createIndex tableName="user_ship" indexName="idx_user_ship_user">
+            <column name="user_id"/>
         </createIndex>
         
-        <createIndex tableName="USER_SHIP" indexName="IDX_USER_SHIP_SHIP">
-            <column name="SHIP_ID"/>
+        <createIndex tableName="user_ship" indexName="idx_user_ship_ship">
+            <column name="ship_id"/>
         </createIndex>
     </changeSet>
 </databaseChangeLog>

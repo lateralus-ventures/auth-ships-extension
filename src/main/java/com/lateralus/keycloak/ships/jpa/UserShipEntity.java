@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "USER_SHIP")
+@Table(name = "user_ship")
 @IdClass(UserShipEntity.UserShipId.class)
 @NamedQueries({
     @NamedQuery(name = "findUserShips", query = "SELECT us FROM UserShipEntity us WHERE us.userId = :userId"),
@@ -16,21 +16,21 @@ import java.util.Set;
 public class UserShipEntity {
     
     @Id
-    @Column(name = "USER_ID", length = 36)
+    @Column(name = "user_id", length = 36)
     private String userId;
     
     @Id
-    @Column(name = "SHIP_ID", length = 36)
+    @Column(name = "ship_id", length = 36)
     private String shipId;
     
-    @Column(name = "ASSIGNED_AT")
+    @Column(name = "assigned_at")
     private Long assignedAt;
     
     @ManyToMany
     @JoinTable(
-        name = "USER_SHIP",
-        joinColumns = @JoinColumn(name = "SHIP_ID"),
-        inverseJoinColumns = @JoinColumn(name = "USER_ID")
+        name = "user_ship",
+        joinColumns = @JoinColumn(name = "ship_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<ShipEntity> ships = new HashSet<>();
     

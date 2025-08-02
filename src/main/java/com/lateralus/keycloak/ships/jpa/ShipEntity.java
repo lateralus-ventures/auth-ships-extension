@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "SHIP")
+@Table(name = "ship")
 @NamedQueries({
     @NamedQuery(name = "findShipsByRealm", query = "SELECT s FROM ShipEntity s WHERE s.realmId = :realmId"),
     @NamedQuery(name = "findShipsByOrganization", query = "SELECT s FROM ShipEntity s WHERE s.realmId = :realmId AND s.organizationId = :organizationId"),
@@ -15,37 +15,37 @@ import java.util.Set;
 public class ShipEntity {
     
     @Id
-    @Column(name = "ID", length = 36)
+    @Column(name = "id", length = 36)
     private String id;
     
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
     
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
     private String description;
     
-    @Column(name = "IMO", length = 20)
+    @Column(name = "imo", length = 20)
     private String imo;
     
-    @Column(name = "TYPE", length = 50)
+    @Column(name = "type", length = 50)
     private String type;
     
-    @Column(name = "ORGANIZATION_ID", length = 36)
+    @Column(name = "organization_id", length = 36)
     private String organizationId;
     
-    @Column(name = "REALM_ID", length = 36, nullable = false)
+    @Column(name = "realm_id", length = 36, nullable = false)
     private String realmId;
     
-    @Column(name = "SHIP_EQUIPMENT", columnDefinition = "TEXT")
+    @Column(name = "ship_equipment", columnDefinition = "TEXT")
     private String shipEquipment; // JSON
     
-    @Column(name = "CREW_AI_MODE", length = 20)
+    @Column(name = "crew_ai_mode", length = 20)
     private String crewAiMode;
     
-    @Column(name = "CREATED_AT")
+    @Column(name = "created_at")
     private Long createdAt;
     
-    @Column(name = "UPDATED_AT")
+    @Column(name = "updated_at")
     private Long updatedAt;
     
     @ManyToMany(mappedBy = "ships", fetch = FetchType.LAZY)
