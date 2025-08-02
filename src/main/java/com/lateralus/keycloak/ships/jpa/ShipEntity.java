@@ -1,8 +1,6 @@
 package com.lateralus.keycloak.ships.jpa;
 
 import jakarta.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "ship")
@@ -48,8 +46,8 @@ public class ShipEntity {
     @Column(name = "updated_at")
     private Long updatedAt;
     
-    @ManyToMany(mappedBy = "ships", fetch = FetchType.LAZY)
-    private Set<UserShipEntity> users = new HashSet<>();
+    // Remove the incorrect ManyToMany relationship
+    // UserShipEntity should be managed separately as it's a join table entity
     
     // Getters and setters
     public String getId() {
@@ -140,13 +138,7 @@ public class ShipEntity {
         this.updatedAt = updatedAt;
     }
     
-    public Set<UserShipEntity> getUsers() {
-        return users;
-    }
-    
-    public void setUsers(Set<UserShipEntity> users) {
-        this.users = users;
-    }
+    // Removed getUsers/setUsers methods as we manage relationships through UserShipEntity directly
     
     @PrePersist
     public void prePersist() {

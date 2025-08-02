@@ -2,8 +2,6 @@ package com.lateralus.keycloak.ships.jpa;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user_ship")
@@ -26,13 +24,7 @@ public class UserShipEntity {
     @Column(name = "assigned_at")
     private Long assignedAt;
     
-    @ManyToMany
-    @JoinTable(
-        name = "user_ship",
-        joinColumns = @JoinColumn(name = "ship_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<ShipEntity> ships = new HashSet<>();
+    // Removed ManyToMany as this entity IS the join table itself
     
     public static class UserShipId implements Serializable {
         private String userId;
@@ -85,13 +77,7 @@ public class UserShipEntity {
         this.assignedAt = assignedAt;
     }
     
-    public Set<ShipEntity> getShips() {
-        return ships;
-    }
-    
-    public void setShips(Set<ShipEntity> ships) {
-        this.ships = ships;
-    }
+    // Removed getShips/setShips methods
     
     @PrePersist
     public void prePersist() {
