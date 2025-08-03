@@ -11,17 +11,22 @@ console.log('🔥 Document ready state:', document.readyState);
     
     console.log('🔥 Inside IIFE wrapper');
     
-    // Check if the lottie container exists
-    const lottieContainer = document.querySelector('.kc-lottie-player');
-    console.log('🔥 Lottie container search result:', lottieContainer);
-    
-    if (!lottieContainer) {
-        console.log('🔥 NO LOTTIE CONTAINER FOUND - exiting early');
-        // Let's see what containers DO exist
-        const allDivs = document.querySelectorAll('div');
-        console.log('🔥 All divs on page:', allDivs.length);
-        console.log('🔥 Sample div classes:', Array.from(allDivs).slice(0, 5).map(d => d.className));
-        return;
+    // Function to check for lottie container (will be called after DOM loads)
+    function findLottieContainer() {
+        const lottieContainer = document.querySelector('.kc-lottie-player');
+        console.log('🔥 Lottie container search result:', lottieContainer);
+        
+        if (!lottieContainer) {
+            console.log('🔥 NO LOTTIE CONTAINER FOUND');
+            // Let's see what containers DO exist
+            const allDivs = document.querySelectorAll('div');
+            console.log('🔥 All divs on page:', allDivs.length);
+            console.log('🔥 Sample div classes:', Array.from(allDivs).slice(0, 5).map(d => d.className));
+            return null;
+        }
+        
+        console.log('✅ Lottie container found!');
+        return lottieContainer;
     }
     
     // Try to load the actual Lottie file - adjust path for Keycloak resources
@@ -30,6 +35,13 @@ console.log('🔥 Document ready state:', document.readyState);
     // Function to load Lottie via CDN if available
     function loadLottieAnimation() {
         console.log('🎭 Attempting to load Lottie animation...');
+        const lottieContainer = findLottieContainer();
+        
+        if (!lottieContainer) {
+            console.log('❌ Cannot load Lottie - container not found');
+            return;
+        }
+        
         console.log('📍 Lottie container found:', lottieContainer);
         console.log('🔗 Lottie URL:', lottieUrl);
         
@@ -80,6 +92,12 @@ console.log('🔥 Document ready state:', document.readyState);
     
     // Add some dynamic interaction to the SVG fallback
     function enhanceSVGAnimation() {
+        const lottieContainer = findLottieContainer();
+        if (!lottieContainer) {
+            console.log('❌ Cannot enhance SVG - container not found');
+            return;
+        }
+        
         const svg = lottieContainer.querySelector('svg');
         if (svg) {
             // Add click interaction
