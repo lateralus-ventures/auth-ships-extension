@@ -2,21 +2,53 @@
   <!-- Background Circle -->
   <circle cx="75" cy="75" r="75" fill="url(#gradient)" />
   
-  <!-- Ship Icon -->
-  <g transform="translate(37.5, 40)">
+  <!-- Ship Container with animation group -->
+  <g class="ship-container" transform="translate(37.5, 40)">
     <!-- Hull -->
-    <path d="M10 45 L65 45 L70 35 L65 25 L10 25 Z" fill="#ffffff" stroke="#2cdb87" stroke-width="2"/>
+    <path class="ship-hull" d="M10 45 L65 45 L70 35 L65 25 L10 25 Z" fill="#ffffff" stroke="#2cdb87" stroke-width="2"/>
+    
     <!-- Mast -->
-    <line x1="37.5" y1="25" x2="37.5" y2="5" stroke="#ffffff" stroke-width="3"/>
-    <!-- Sail -->
-    <path d="M40 8 L40 22 L60 15 Z" fill="#ffffff" opacity="0.9"/>
-    <!-- Flag -->
-    <path d="M37.5 5 L37.5 12 L50 8 Z" fill="#2cdb87"/>
+    <line class="ship-mast" x1="37.5" y1="25" x2="37.5" y2="5" stroke="#ffffff" stroke-width="3"/>
+    
+    <!-- Main Sail with flutter animation -->
+    <path class="ship-sail" d="M40 8 L40 22 L60 15 Z" fill="#ffffff" opacity="0.9">
+      <animateTransform
+        attributeName="transform"
+        type="scale"
+        values="1,1;0.95,1;1,1"
+        dur="4s"
+        repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Flag with wave animation -->
+    <path class="ship-flag" d="M37.5 5 L37.5 12 L50 8 Z" fill="#2cdb87">
+      <animateTransform
+        attributeName="transform"
+        type="scale"
+        values="1,1;1.05,0.95;1,1"
+        dur="2.5s"
+        repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Water waves at the bottom -->
+    <path class="water-wave" d="M5 45 Q15 42 25 45 T45 45 T65 45 T85 45" stroke="#2cdb87" stroke-width="2" fill="none" opacity="0.6">
+      <animate
+        attributeName="d"
+        values="M5 45 Q15 42 25 45 T45 45 T65 45 T85 45;M5 45 Q15 48 25 45 T45 45 T65 45 T85 45;M5 45 Q15 42 25 45 T45 45 T65 45 T85 45"
+        dur="3s"
+        repeatCount="indefinite"/>
+    </path>
   </g>
   
-  <!-- Text -->
-  <text x="75" y="110" text-anchor="middle" fill="#ffffff" font-family="Work Sans, sans-serif" font-size="16" font-weight="600">Ask Chief</text>
-  <text x="75" y="128" text-anchor="middle" fill="#ffffff" font-family="Work Sans, sans-serif" font-size="10" opacity="0.9">AI Shipping Intelligence</text>
+  <!-- Text with subtle animation -->
+  <text x="75" y="110" text-anchor="middle" fill="#ffffff" font-family="Work Sans, sans-serif" font-size="16" font-weight="600">
+    Ask Chief
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="4s" repeatCount="indefinite"/>
+  </text>
+  
+  <text x="75" y="128" text-anchor="middle" fill="#ffffff" font-family="Work Sans, sans-serif" font-size="10" opacity="0.9">
+    AI Shipping Intelligence
+  </text>
   
   <!-- Gradient Definition -->
   <defs>
@@ -24,5 +56,21 @@
       <stop offset="0%" style="stop-color:#2cdb87;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#1a906d;stop-opacity:1" />
     </radialGradient>
+    
+    <!-- Enhanced gradient for depth -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
+  
+  <!-- Apply glow filter to the entire logo -->
+  <style>
+    .ship-container {
+      filter: url(#glow);
+    }
+  </style>
 </svg>
