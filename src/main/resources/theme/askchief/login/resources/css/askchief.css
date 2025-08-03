@@ -24,7 +24,7 @@
   --green-200: #a7f3d0;
   --green-300: #6ee7b7;
   --green-400: #34d399;
-  --green-500: #10b981;
+  --green-500: #2cdb87;
   --green-600: #059669;
   --green-700: #047857;
   --green-800: #065f46;
@@ -66,7 +66,12 @@
 }
 
 body {
-  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+  background: radial-gradient(
+    146.64% 140% at 48.08% -12.92%,
+    #2cdb87 13.45%,
+    #ebebeb 40.89%,
+    #ebebeb 90.49%
+  );
   color: var(--text-primary);
   font-family: 'Work Sans', 'Inter', sans-serif;
   margin: 0;
@@ -80,7 +85,12 @@ body {
 }
 
 .login-pf body {
-  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+  background: radial-gradient(
+    146.64% 140% at 48.08% -12.92%,
+    #2cdb87 13.45%,
+    #ebebeb 40.89%,
+    #ebebeb 90.49%
+  );
 }
 
 .login-pf .container {
@@ -385,4 +395,32 @@ a:hover {
   color: var(--text-secondary);
   font-size: 0.875rem;
   margin: 0;
+}
+
+/* Lottie Animation Styling */
+.kc-lottie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.kc-lottie-player {
+  width: 150px;
+  height: 150px;
+}
+
+/* Blink Animation for Loading */
+@keyframes blink-animation {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.kc-blink-animation {
+  animation: blink-animation 3s infinite;
 }

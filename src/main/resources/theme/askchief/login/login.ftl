@@ -1,6 +1,14 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
+        <!-- Lottie Animation Container -->
+        <div class="kc-lottie-container">
+            <div class="kc-lottie-player">
+                <!-- We'll use an iframe to display the Lottie animation since Keycloak doesn't support JS -->
+                <img src="${url.resourcesPath}/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />
+            </div>
+        </div>
+        
         <div class="kc-custom-header">
             <h1>Ask Chief</h1>
             <p>AI-Powered Shipping Intelligence Platform</p>
@@ -77,25 +85,7 @@
         </#if>
         </div>
 
-        <#if realm.password && social.providers??>
-            <div id="kc-social-providers" class="${properties.kcFormSocialAccountSectionClass!}">
-                <hr/>
-                <h4>${msg("identity-provider-login-label")}</h4>
-                <ul class="${properties.kcFormSocialAccountListClass!} <#if social.providers?size gt 3>${properties.kcFormSocialAccountListGridClass!}</#if>">
-                    <#list social.providers as p>
-                        <a id="social-${p.alias}" class="${properties.kcFormSocialAccountListButtonClass!} <#if social.providers?size gt 3>${properties.kcFormSocialAccountGridItem!}</#if>"
-                                type="button" href="${p.loginUrl}">
-                            <#if p.iconClasses?has_content>
-                                <i class="${properties.kcCommonLogoIdP!} ${p.iconClasses!}" aria-hidden="true"></i>
-                                <span class="${properties.kcFormSocialAccountNameClass!} kc-social-icon-text">${p.displayName!}</span>
-                            <#else>
-                                <span class="${properties.kcFormSocialAccountNameClass!}">${p.displayName!}</span>
-                            </#if>
-                        </a>
-                    </#list>
-                </ul>
-            </div>
-        </#if>
+        <!-- Social login section removed completely -->
 
     </div>
     <#elseif section = "info" >
