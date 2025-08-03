@@ -1,14 +1,16 @@
 <#import "template.ftl" as layout>
+
+<!-- Ask Chief Lottie Animation - positioned above everything -->
+<div class="kc-lottie-container-header">
+    <div class="kc-lottie-container">
+        <div class="kc-lottie-player">
+            <img src="${url.resourcesPath}/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />
+        </div>
+    </div>
+</div>
+
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
-        <!-- Lottie Animation Container -->
-        <div class="kc-lottie-container">
-            <div class="kc-lottie-player">
-                <!-- SVG fallback - will be replaced by Lottie if JS loads successfully -->
-                <img src="${url.resourcesPath}/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />
-            </div>
-        </div>
-        
         <div class="kc-custom-header">
             <h1>Ask Chief</h1>
             <p>AI-Powered Shipping Intelligence Platform</p>
