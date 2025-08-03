@@ -453,6 +453,16 @@ a:hover {
   position: relative;
 }
 
+/* Hide SVG fallback by default - only show Lottie */
+.kc-lottie-player img {
+  display: none;
+}
+
+/* Show fallback only if Lottie fails to load */
+.kc-lottie-fallback .kc-lottie-player img {
+  display: block;
+}
+
 /* CSS Animations to mimic Lottie */
 @keyframes gentle-bounce {
   0%, 20%, 50%, 80%, 100% {

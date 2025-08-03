@@ -73,9 +73,12 @@ console.log('🔥 Document ready state:', document.readyState);
                 
                 player.addEventListener('error', function(e) {
                     console.log('❌ DotLottie animation error:', e);
-                    console.log('🔄 Keeping SVG fallback');
-                    // Restore SVG fallback
-                    lottieContainer.innerHTML = '<img src="/resources/j3qk5/login/askchief/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />';
+                    console.log('🔄 Showing SVG fallback');
+                    // Show SVG fallback by adding CSS class
+                    const container = document.querySelector('.kc-lottie-container-header');
+                    if (container) {
+                        container.classList.add('kc-lottie-fallback');
+                    }
                 });
                 
                 // Add player to container
@@ -83,12 +86,22 @@ console.log('🔥 Document ready state:', document.readyState);
                 
             } catch (e) {
                 console.log('❌ DotLottie loading failed:', e);
-                console.log('🔄 Keeping SVG fallback');
+                console.log('🔄 Showing SVG fallback');
+                // Show SVG fallback by adding CSS class
+                const container = document.querySelector('.kc-lottie-container-header');
+                if (container) {
+                    container.classList.add('kc-lottie-fallback');
+                }
             }
         };
         script.onerror = function(e) {
             console.log('❌ DotLottie CDN failed to load:', e);
-            console.log('🔄 Keeping SVG fallback');
+            console.log('🔄 Showing SVG fallback');
+            // Show SVG fallback by adding CSS class
+            const container = document.querySelector('.kc-lottie-container-header');
+            if (container) {
+                container.classList.add('kc-lottie-fallback');
+            }
         };
         document.head.appendChild(script);
     }
