@@ -1,12 +1,26 @@
 // Simple Lottie animation loader for Keycloak
 // Falls back to CSS animation if Lottie is not available
 
+// IMMEDIATE DEBUG - this should always show
+console.log('🔥 LOTTIE SCRIPT EXECUTING - IMMEDIATE');
+console.log('🔥 Current URL:', window.location.href);
+console.log('🔥 Document ready state:', document.readyState);
+
 (function() {
     'use strict';
     
+    console.log('🔥 Inside IIFE wrapper');
+    
     // Check if the lottie container exists
     const lottieContainer = document.querySelector('.kc-lottie-player');
+    console.log('🔥 Lottie container search result:', lottieContainer);
+    
     if (!lottieContainer) {
+        console.log('🔥 NO LOTTIE CONTAINER FOUND - exiting early');
+        // Let's see what containers DO exist
+        const allDivs = document.querySelectorAll('div');
+        console.log('🔥 All divs on page:', allDivs.length);
+        console.log('🔥 Sample div classes:', Array.from(allDivs).slice(0, 5).map(d => d.className));
         return;
     }
     
