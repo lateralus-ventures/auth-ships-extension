@@ -1,0 +1,6 @@
+{
+    "themes": [{
+        "name": "askchief",
+        "types": [ "login" ]
+    }]
+}
