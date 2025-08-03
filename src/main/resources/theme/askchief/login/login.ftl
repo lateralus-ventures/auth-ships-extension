@@ -4,7 +4,7 @@
         <!-- Lottie Animation Container -->
         <div class="kc-lottie-container">
             <div class="kc-lottie-player">
-                <!-- We'll use an iframe to display the Lottie animation since Keycloak doesn't support JS -->
+                <!-- SVG fallback - will be replaced by Lottie if JS loads successfully -->
                 <img src="${url.resourcesPath}/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />
             </div>
         </div>

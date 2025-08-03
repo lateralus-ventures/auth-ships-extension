@@ -10,35 +10,56 @@
         return;
     }
     
-    // Try to load the actual Lottie file if possible
-    const lottieUrl = '/realms/master/askchief/login/resources/img/Chief Demo v4 LOT.lottie';
+    // Try to load the actual Lottie file - adjust path for Keycloak resources
+    const lottieUrl = '/resources/j3qk5/login/askchief/img/Chief Demo v4 LOT.lottie';
     
     // Function to load Lottie via CDN if available
     function loadLottieAnimation() {
+        console.log('🎭 Attempting to load Lottie animation...');
+        console.log('📍 Lottie container found:', lottieContainer);
+        console.log('🔗 Lottie URL:', lottieUrl);
+        
         // First try to load lottie-web from CDN
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
         script.onload = function() {
+            console.log('✅ Lottie CDN loaded successfully');
             if (typeof lottie !== 'undefined') {
                 try {
+                    console.log('🎬 Starting Lottie animation load...');
+                    
                     // Clear the container
                     lottieContainer.innerHTML = '';
                     
                     // Load the Lottie animation
-                    lottie.loadAnimation({
+                    const animation = lottie.loadAnimation({
                         container: lottieContainer,
                         renderer: 'svg',
                         loop: true,
                         autoplay: true,
                         path: lottieUrl
                     });
+                    
+                    animation.addEventListener('complete', function() {
+                        console.log('🎉 Lottie animation loaded successfully!');
+                    });
+                    
+                    animation.addEventListener('error', function(e) {
+                        console.log('❌ Lottie animation error:', e);
+                        console.log('🔄 Keeping SVG fallback');
+                    });
+                    
                 } catch (e) {
-                    console.log('Lottie loading failed, keeping SVG fallback');
+                    console.log('❌ Lottie loading failed:', e);
+                    console.log('🔄 Keeping SVG fallback');
                 }
+            } else {
+                console.log('❌ Lottie library not available after CDN load');
             }
         };
-        script.onerror = function() {
-            console.log('Lottie CDN failed, keeping SVG fallback');
+        script.onerror = function(e) {
+            console.log('❌ Lottie CDN failed to load:', e);
+            console.log('🔄 Keeping SVG fallback');
         };
         document.head.appendChild(script);
     }
@@ -68,13 +89,19 @@
     }
     
     // Initialize when DOM is ready
+    console.log('🚀 Lottie loader script started');
+    console.log('📊 Document ready state:', document.readyState);
+    
     if (document.readyState === 'loading') {
+        console.log('⏳ Waiting for DOM to load...');
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM loaded, initializing...');
             enhanceSVGAnimation();
             // Try to load Lottie after a delay
             setTimeout(loadLottieAnimation, 500);
         });
     } else {
+        console.log('✅ DOM already loaded, initializing immediately...');
         enhanceSVGAnimation();
         setTimeout(loadLottieAnimation, 500);
     }
