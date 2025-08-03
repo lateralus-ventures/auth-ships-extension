@@ -45,46 +45,49 @@ console.log('🔥 Document ready state:', document.readyState);
         console.log('📍 Lottie container found:', lottieContainer);
         console.log('🔗 Lottie URL:', lottieUrl);
         
-        // First try to load lottie-web from CDN
+        // Load dotLottie player for .lottie files
         const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
+        script.src = 'https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs';
+        script.type = 'module';
         script.onload = function() {
-            console.log('✅ Lottie CDN loaded successfully');
-            if (typeof lottie !== 'undefined') {
-                try {
-                    console.log('🎬 Starting Lottie animation load...');
-                    
-                    // Clear the container
-                    lottieContainer.innerHTML = '';
-                    
-                    // Load the Lottie animation
-                    const animation = lottie.loadAnimation({
-                        container: lottieContainer,
-                        renderer: 'svg',
-                        loop: true,
-                        autoplay: true,
-                        path: lottieUrl
-                    });
-                    
-                    animation.addEventListener('complete', function() {
-                        console.log('🎉 Lottie animation loaded successfully!');
-                    });
-                    
-                    animation.addEventListener('error', function(e) {
-                        console.log('❌ Lottie animation error:', e);
-                        console.log('🔄 Keeping SVG fallback');
-                    });
-                    
-                } catch (e) {
-                    console.log('❌ Lottie loading failed:', e);
+            console.log('✅ DotLottie player loaded successfully');
+            try {
+                console.log('🎬 Starting DotLottie animation load...');
+                
+                // Clear the container
+                lottieContainer.innerHTML = '';
+                
+                // Create dotlottie-player element
+                const player = document.createElement('dotlottie-player');
+                player.setAttribute('src', lottieUrl);
+                player.setAttribute('background', 'transparent');
+                player.setAttribute('speed', '1');
+                player.setAttribute('style', 'width: 150px; height: 150px;');
+                player.setAttribute('loop', '');
+                player.setAttribute('autoplay', '');
+                
+                // Add event listeners
+                player.addEventListener('ready', function() {
+                    console.log('🎉 DotLottie animation loaded successfully!');
+                });
+                
+                player.addEventListener('error', function(e) {
+                    console.log('❌ DotLottie animation error:', e);
                     console.log('🔄 Keeping SVG fallback');
-                }
-            } else {
-                console.log('❌ Lottie library not available after CDN load');
+                    // Restore SVG fallback
+                    lottieContainer.innerHTML = '<img src="/resources/j3qk5/login/askchief/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />';
+                });
+                
+                // Add player to container
+                lottieContainer.appendChild(player);
+                
+            } catch (e) {
+                console.log('❌ DotLottie loading failed:', e);
+                console.log('🔄 Keeping SVG fallback');
             }
         };
         script.onerror = function(e) {
-            console.log('❌ Lottie CDN failed to load:', e);
+            console.log('❌ DotLottie CDN failed to load:', e);
             console.log('🔄 Keeping SVG fallback');
         };
         document.head.appendChild(script);
