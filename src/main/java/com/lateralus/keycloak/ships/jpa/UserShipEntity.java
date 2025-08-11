@@ -9,7 +9,8 @@ import java.io.Serializable;
 @NamedQueries({
     @NamedQuery(name = "findUserShips", query = "SELECT us FROM UserShipEntity us WHERE us.userId = :userId"),
     @NamedQuery(name = "findShipUsers", query = "SELECT us FROM UserShipEntity us WHERE us.shipId = :shipId"),
-    @NamedQuery(name = "deleteUserShip", query = "DELETE FROM UserShipEntity us WHERE us.userId = :userId AND us.shipId = :shipId")
+    @NamedQuery(name = "deleteUserShip", query = "DELETE FROM UserShipEntity us WHERE us.userId = :userId AND us.shipId = :shipId"),
+    @NamedQuery(name = "deleteUserShipByShipId", query = "DELETE FROM UserShipEntity us WHERE us.shipId = :shipId")
 })
 public class UserShipEntity {
     

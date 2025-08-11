@@ -68,7 +68,7 @@ public class ShipService {
     
     public void deleteShip(String shipId) {
         // First delete all user-ship relationships
-        em.createNamedQuery("deleteUserShip")
+        em.createNamedQuery("deleteUserShipByShipId")
             .setParameter("shipId", shipId)
             .executeUpdate();
             
