@@ -4,7 +4,7 @@
 <div class="kc-lottie-container-header">
     <div class="kc-lottie-container">
         <div class="kc-lottie-player">
-            <img src="${url.resourcesPath}/img/askchief-logo.svg" alt="Ask Chief" style="width: 150px; height: 150px;" />
+            <img src="${url.resourcesPath}/img/transparent.svg" alt="" style="width: 150px; height: 150px;" />
         </div>
     </div>
 </div>
