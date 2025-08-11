@@ -34,6 +34,9 @@ public class ShipEntity {
     @Column(name = "realm_id", length = 36, nullable = false)
     private String realmId;
     
+    @Column(name = "external_id", length = 24, unique = true)
+    private String externalId;
+    
     @Column(name = "ship_equipment", columnDefinition = "TEXT")
     private String shipEquipment; // JSON
     
@@ -104,6 +107,14 @@ public class ShipEntity {
     
     public void setRealmId(String realmId) {
         this.realmId = realmId;
+    }
+    
+    public String getExternalId() {
+        return externalId;
+    }
+    
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
     
     public String getShipEquipment() {

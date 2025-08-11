@@ -53,4 +53,14 @@
             <column name="ship_id"/>
         </createIndex>
     </changeSet>
+    
+    <changeSet id="1.0.1-ships-external-id" author="lateralus">
+        <addColumn tableName="ship">
+            <column name="external_id" type="VARCHAR(24)"/>
+        </addColumn>
+        
+        <createIndex tableName="ship" indexName="idx_ship_external_id" unique="true">
+            <column name="external_id"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

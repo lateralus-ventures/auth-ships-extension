@@ -130,6 +130,7 @@ public class ShipService {
         rep.setType(entity.getType());
         rep.setOrganizationId(entity.getOrganizationId());
         rep.setRealmId(entity.getRealmId());
+        rep.setExternalId(entity.getExternalId());
         rep.setCrewAiMode(entity.getCrewAiMode());
         rep.setCreatedAt(entity.getCreatedAt());
         rep.setUpdatedAt(entity.getUpdatedAt());
@@ -154,6 +155,7 @@ public class ShipService {
         entity.setType(rep.getType());
         entity.setOrganizationId(rep.getOrganizationId());
         entity.setRealmId(rep.getRealmId());
+        entity.setExternalId(rep.getExternalId());
         entity.setCrewAiMode(rep.getCrewAiMode());
         
         // Convert equipment to JSON

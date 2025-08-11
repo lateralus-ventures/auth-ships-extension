@@ -10,6 +10,7 @@ public class ShipRepresentation {
     private String type;
     private String organizationId;
     private String realmId;
+    private String externalId;
     private Map<String, Object> shipEquipment;
     private String crewAiMode;
     private Long createdAt;
@@ -70,6 +71,14 @@ public class ShipRepresentation {
     
     public void setRealmId(String realmId) {
         this.realmId = realmId;
+    }
+    
+    public String getExternalId() {
+        return externalId;
+    }
+    
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
     
     public Map<String, Object> getShipEquipment() {
