@@ -56,21 +56,21 @@
 
                 </div>
 
-                <div class="kc-form-setting-row">
-                    <#if realm.rememberMe && !usernameHidden??>
+                <#if realm.rememberMe && !usernameHidden??>
+                    <div class="kc-remember-me-row">
                         <div class="checkbox">
                             <input tabindex="3" id="rememberMe" name="rememberMe" type="checkbox"
                                    <#if login.rememberMe??>checked</#if>>
                             <label for="rememberMe">Remember me</label>
                         </div>
-                    </#if>
-                    
-                    <#if realm.resetPasswordAllowed>
-                        <div class="kc-forgot-password">
-                            <a tabindex="4" href="${url.loginResetCredentialsUrl}">Forgot Password?</a>
-                        </div>
-                    </#if>
-                </div>
+                    </div>
+                </#if>
+                
+                <#if realm.resetPasswordAllowed>
+                    <div class="kc-forgot-password">
+                        <a tabindex="4" href="${url.loginResetCredentialsUrl}">Forgot Password?</a>
+                    </div>
+                </#if>
 
                   <div id="kc-form-buttons" class="${properties.kcFormGroupClass!}">
                       <input type="hidden" id="id-hidden-input" name="credentialId" <#if auth.selectedCredential?has_content>value="${auth.selectedCredential}"</#if>/>
