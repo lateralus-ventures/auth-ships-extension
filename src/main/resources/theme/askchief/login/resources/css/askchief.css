@@ -199,6 +199,7 @@ body {
   color: var(--text-primary);
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
+  height: 42px !important;
 }
 
 .form-control:focus,
@@ -516,6 +517,9 @@ a:hover {
   width: 150px;
   height: 150px;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
 }
 
 /* Hide SVG fallback by default - only show Lottie */
@@ -629,6 +633,19 @@ a:hover {
 }
 
 .kc-forgot-password a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* Back to Login link - consistent with Forgot Password styling */
+#kc-form-options a {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+#kc-form-options a:hover {
   color: var(--text-primary);
   text-decoration: underline;
 }
