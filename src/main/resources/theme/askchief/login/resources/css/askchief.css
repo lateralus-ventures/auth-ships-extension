@@ -191,7 +191,7 @@ body {
 .form-control,
 .pf-c-form-control {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 10px 16px;
   border: none;
   border-radius: 10px;
   font-size: 1rem;
@@ -200,12 +200,14 @@ body {
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   height: 42px !important;
+  line-height: 1.375;
 }
 
 .form-control:focus,
 .pf-c-form-control:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(44, 219, 135, 0.2);
+  padding: 10px 16px;
 }
 
 .form-control::placeholder,
@@ -244,8 +246,8 @@ input[type="submit"].pf-c-button.pf-m-primary {
   color: var(--black);
   text-align: center;
   
-  /* font-medium */
-  font-weight: 500;
+  /* font-normal (not bold) */
+  font-weight: 400;
   
   /* tracking-wide */
   letter-spacing: 0.025em;
@@ -498,6 +500,8 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .kc-form-setting-row #kc-form-options {
@@ -507,6 +511,12 @@ a:hover {
 
 .kc-form-setting-row .kc-forgot-password {
   margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.kc-form-setting-row .checkbox {
+  margin: 0;
 }
 
 .card-pf {
@@ -519,7 +529,6 @@ a:hover {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 80px;
 }
 
 /* Hide SVG fallback by default - only show Lottie */

@@ -56,15 +56,25 @@
 
                 </div>
 
-                <#if realm.resetPasswordAllowed>
-                    <div class="kc-forgot-password">
-                        <a tabindex="3" href="${url.loginResetCredentialsUrl}">Forgot Password?</a>
-                    </div>
-                </#if>
+                <div class="kc-form-setting-row">
+                    <#if realm.rememberMe && !usernameHidden??>
+                        <div class="checkbox">
+                            <input tabindex="3" id="rememberMe" name="rememberMe" type="checkbox"
+                                   <#if login.rememberMe??>checked</#if>>
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                    </#if>
+                    
+                    <#if realm.resetPasswordAllowed>
+                        <div class="kc-forgot-password">
+                            <a tabindex="4" href="${url.loginResetCredentialsUrl}">Forgot Password?</a>
+                        </div>
+                    </#if>
+                </div>
 
                   <div id="kc-form-buttons" class="${properties.kcFormGroupClass!}">
                       <input type="hidden" id="id-hidden-input" name="credentialId" <#if auth.selectedCredential?has_content>value="${auth.selectedCredential}"</#if>/>
-                      <input tabindex="4" class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" name="login" id="kc-login" type="submit" value="Continue"/>
+                      <input tabindex="5" class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" name="login" id="kc-login" type="submit" value="Continue"/>
                   </div>
             </form>
         </#if>
