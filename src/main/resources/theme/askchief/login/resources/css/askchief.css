@@ -329,6 +329,10 @@ a:hover {
   border: 1px solid;
 }
 
+.pf-c-alert {
+  margin-bottom: 20px;
+}
+
 .alert-error {
   background-color: #fef2f2;
   border-color: #fecaca;
@@ -510,6 +514,7 @@ a:hover {
 .kc-remember-me-row .checkbox input[type="checkbox"] {
   margin-right: 0.5rem;
   margin-left: 0;
+  margin-top: 0;
 }
 
 .kc-remember-me-row .checkbox label {
@@ -629,8 +634,8 @@ a:hover {
 
 /* Forgot password link styling */
 .kc-forgot-password {
-  text-align: left;
-  margin-top: 0.5rem;
+  text-align: center;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
 
