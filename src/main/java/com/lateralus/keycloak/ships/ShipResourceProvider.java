@@ -115,11 +115,12 @@ public class ShipResourceProvider implements RealmResourceProvider {
     
     @POST
     @Path("users/{userId}/ships/{shipId}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response assignUserToShip(@PathParam("userId") String userId, @PathParam("shipId") String shipId) {
         try {
             ShipService shipService = new ShipService(session);
             shipService.assignUserToShip(userId, shipId);
-            return Response.ok().build();
+            return Response.ok(Map.of("message", "User assigned to ship successfully")).build();
         } catch (Exception e) {
             return Response.serverError().entity(Map.of("error", e.getMessage())).build();
         }
