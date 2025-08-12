@@ -63,4 +63,26 @@
             <column name="external_id"/>
         </createIndex>
     </changeSet>
+    
+    <changeSet id="1.0.2-add-foreign-keys" author="lateralus">
+        <comment>Add foreign key constraints for proper cascade deletion</comment>
+        
+        <!-- Add foreign key from user_ship.user_id to user_entity.id with cascade delete -->
+        <addForeignKeyConstraint 
+            baseTableName="user_ship" 
+            baseColumnNames="user_id"
+            constraintName="fk_user_ship_user"
+            referencedTableName="user_entity"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+        
+        <!-- Add foreign key from user_ship.ship_id to ship.id with cascade delete -->
+        <addForeignKeyConstraint 
+            baseTableName="user_ship" 
+            baseColumnNames="ship_id"
+            constraintName="fk_user_ship_ship"
+            referencedTableName="ship"
+            referencedColumnNames="id"
+            onDelete="CASCADE"/>
+    </changeSet>
 </databaseChangeLog>
