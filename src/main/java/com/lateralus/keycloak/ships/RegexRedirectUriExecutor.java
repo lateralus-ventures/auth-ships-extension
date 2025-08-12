@@ -22,7 +22,6 @@ import java.util.regex.PatternSyntaxException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.lang.reflect.Method;
 
 /**
  * Client Policy Executor that validates redirect URIs against regex patterns.
@@ -80,43 +79,28 @@ public class RegexRedirectUriExecutor implements ClientPolicyExecutorProvider<Re
     private void executeOnAuthorizationRequest(ClientPolicyContext context) throws ClientPolicyException {
         AuthorizationRequestContext authContext = (AuthorizationRequestContext) context;
         
-        // Get the client from the context - method name might vary
-        ClientModel client = null;
-        try {
-            // Try common methods to get the client
-            if (authContext.getClass().getMethod("getClient") != null) {
-                client = (ClientModel) authContext.getClass().getMethod("getClient").invoke(authContext);
-            }
-        } catch (Exception e) {
-            logger.debugf("Could not get client via getClient() method: %s", e.getMessage());
-        }
+        logger.debug("Executing regex redirect URI validation on authorization request");
         
-        if (client == null) {
-            logger.debug("Client is null in authorization request context, skipping validation");
+        // Get redirect_uri directly from the context
+        String redirectUri = authContext.getRedirectUri();
+        
+        if (redirectUri == null || redirectUri.isEmpty()) {
+            logger.debug("No redirect_uri found in authorization request, skipping validation");
             return;
         }
-
-        // Get redirect_uri from request parameters
-        String redirectUri = null;
-        try {
-            // Try to get request parameters
-            Object requestParams = authContext.getClass().getMethod("getRequestParameters").invoke(authContext);
-            if (requestParams instanceof jakarta.ws.rs.core.MultivaluedMap) {
-                @SuppressWarnings("unchecked")
-                jakarta.ws.rs.core.MultivaluedMap<String, String> params = 
-                    (jakarta.ws.rs.core.MultivaluedMap<String, String>) requestParams;
-                redirectUri = params.getFirst("redirect_uri");
-            }
-        } catch (Exception e) {
-            logger.debugf("Could not get redirect_uri from request parameters: %s", e.getMessage());
+        
+        logger.infof("Validating redirect URI from authorization request: %s", redirectUri);
+        
+        // Create a temporary client to pass to validateRedirectUri
+        // We use the client ID from the context to identify which client this is for
+        ClientModel client = session.getContext().getClient();
+        if (client == null) {
+            logger.warn("No client found in session context during authorization request");
+            return;
         }
         
-        if (redirectUri != null && !redirectUri.isEmpty()) {
-            logger.debugf("Validating redirect URI from authorization request: %s", redirectUri);
-            validateRedirectUri(client, redirectUri);
-        } else {
-            logger.debug("No redirect_uri found in authorization request");
-        }
+        logger.infof("Validating redirect URI for client '%s': %s", client.getClientId(), redirectUri);
+        validateRedirectUri(client, redirectUri);
     }
 
     private void validateClientRedirectUris(ClientModel client) throws ClientPolicyException {
