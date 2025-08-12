@@ -125,6 +125,10 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.login-pf-page .card-pf p {
+  color: black;
+}
+
 /* Logo */
 #kc-logo {
   text-align: center;
